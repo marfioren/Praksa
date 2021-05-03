@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormaPrijaveComponent } from './forma-prijave.component';
+import { LogInFormComponent } from './form-LogIn.component';
 
-describe('FormaPrijaveComponent', () => {
-  let component: FormaPrijaveComponent;
-  let fixture: ComponentFixture<FormaPrijaveComponent>;
+describe('LogInFormComponent', () => {
+  let component: LogInFormComponent;
+  let fixture: ComponentFixture<LogInFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormaPrijaveComponent ]
+      declarations: [ LogInFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormaPrijaveComponent);
+    fixture = TestBed.createComponent(LogInFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

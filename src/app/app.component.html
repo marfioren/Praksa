@@ -1,9 +1,10 @@
 
 <nav>
-  <a (click)="toggleEditor('korIme')"></a>
+  <a (click)="toggleEditor('username')"></a>
   <a (click)="toggleEditor('profile')"></a>
 </nav>
 
-<app-forma-prijave *ngIf="showNameEditor"></app-forma-prijave>
+<app-form-LogIn *ngIf="showNameEditor"></app-form-LogIn>
 
 <app-profile-editor *ngIf="showProfileEditor"></app-profile-editor>
+

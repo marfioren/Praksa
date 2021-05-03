@@ -1,0 +1,23 @@
+<form [formGroup]="LogInForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    <div *ngIf="username.invalid" class="wrong">
+      <div *ngIf="username.errors.minlength">
+        Username must be at least 7 characters long.
+      </div>
+    </div>
+    <input type="text" formControlName="username" class="inputUser" value="username" (focus)="onFocusEventUser($event)" required >
+
+  </label>
+  <p></p>
+  <label>
+    <div *ngIf="password.invalid" class="wrong">
+      <div *ngIf="password.errors.minlength">
+        Password must be at least 8 characters long.
+      </div>
+    </div>
+    <input type="{{typeInput}}" formControlName="password" class="inputPass" value="password" (focus)="onFocusEventPass($event)" required >
+  </label>
+  <p></p>
+  <button type="submit" [disabled]="!LogInForm.valid" class="LogInButton">Log in</button>
+</form>
