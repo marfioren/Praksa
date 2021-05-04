@@ -128,9 +128,10 @@ input:focus{
   background-color: #00a3e0;
   border-radius: 30px;
   border: 2px solid #00a3e0;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
+  margin-left: 60px;
   @media screen and (max-width:$desktop) and (min-width:$laptop)
   {
     height:50px;
@@ -159,6 +160,19 @@ input:focus{
     margin-left: 50px;
   }
 }
+.LogInButton:hover{
+  background-color: #24afe3;
+}
+.LogInButton:active{
+  background-color: #24afe3;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}
+.LogInButton:focus{
+  outline: none !important;
+}
+
 .wrong{
   width: 90%;
   height: 35%;
@@ -176,4 +190,21 @@ input:focus{
   {
     font-size: 16px;
   }
+}
+select{
+  margin-top: 10px;
+  margin-left: 10px;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+  font-family: 'Raleway';
+  color: #757575;
+  border-radius: 30px;
+
+
+
+}
+select:focus{
+  border: 1px solid #00a3e0;
+  background-color: #fafafa;
 }

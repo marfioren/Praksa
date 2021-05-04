@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import { UserAuth } from '../security/user-auth';
+import { User } from '../security/users';
+import { SecurityService } from '../security/security.service';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'app-form-LogIn',
@@ -7,8 +11,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./form-LogIn.component.css']
 })
 export class LogInFormComponent {
+
+  user: User = new User();
+  securityObject: UserAuth = null;
+
   LogInForm = new FormGroup({
-    username: new FormControl('Username', [Validators.required, Validators.minLength(7)]),
+    username: new FormControl('Username',[Validators.required, Validators.minLength(7)]),
     password: new FormControl('Password', [Validators.required, Validators.minLength(8)]),
   });
   typeInput: string;
@@ -18,7 +26,9 @@ export class LogInFormComponent {
   get password(){return this.LogInForm.get('password'); }
   // tslint:disable-next-line:typedef
   onSubmit() {
-    console.warn(this.LogInForm.value);
+    this.user.Username=this.LogInForm.value.username;
+    this.user.Password=this.LogInForm.value.password;
+    this.login();
   }
   // tslint:disable-next-line:typedef
   onFocusEventUser(event: any){
@@ -29,4 +39,20 @@ export class LogInFormComponent {
     this.LogInForm.get('password').reset('');
     this.typeInput = 'password';
   }
+  login() {
+    this.securityService.login(this.user).subscribe(resp => {
+      this.securityObject = resp;
+    });
+  }
+  constructor(
+    public translate: TranslateService, private securityService: SecurityService
+  ) {
+    translate.addLangs(['en', 'hr']);
+    translate.setDefaultLang('en');
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
+
 }

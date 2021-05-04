@@ -1,5 +1,7 @@
 {
-  "demo": {
-    "title": "allo"
-  }
+  "usernameError": "Invalid User Name/Password.",
+  "pass": "Password",
+  "button": "Log in",
+  "usernameWarning": "Username must be at least 7 characters long.",
+  "passWarning": "Password must be at least 8 characters long."
 }

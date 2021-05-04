@@ -7,6 +7,8 @@ import { LogInFormComponent } from './form-LogIn/form-LogIn.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +17,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

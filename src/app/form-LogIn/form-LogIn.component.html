@@ -1,23 +1,34 @@
 <form [formGroup]="LogInForm" (ngSubmit)="onSubmit()">
 
   <label>
+    <div class="wrong" *ngIf="securityObject && !securityObject.isAuthenticated">
+      {{'usernameError' | translate }}
+    </div>
     <div *ngIf="username.invalid" class="wrong">
       <div *ngIf="username.errors.minlength">
-        Username must be at least 7 characters long.
+        {{'usernameWarning' | translate }}
       </div>
     </div>
-    <input type="text" formControlName="username" class="inputUser" value="username" (focus)="onFocusEventUser($event)" required >
+    <input type="text" formControlName="username" class="inputUser" value="username" required (focus)="onFocusEventUser($event)" required >
 
   </label>
   <p></p>
   <label>
     <div *ngIf="password.invalid" class="wrong">
       <div *ngIf="password.errors.minlength">
-        Password must be at least 8 characters long.
+        {{'passWarning' | translate }}
       </div>
     </div>
     <input type="{{typeInput}}" formControlName="password" class="inputPass" value="password" (focus)="onFocusEventPass($event)" required >
   </label>
+  <span>
+      <select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+                [selected]="language === translate.currentLang">
+          {{ language }}
+        </option>
+      </select>
+    </span>
   <p></p>
-  <button type="submit" [disabled]="!LogInForm.valid" class="LogInButton">Log in</button>
+  <button type="submit" [disabled]="!LogInForm.valid" class="LogInButton">{{'button' | translate }}</button>
 </form>

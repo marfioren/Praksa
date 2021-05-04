@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 export type EditorType = 'username' | 'profile';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent{
   title = 'LogIn';
   editor: EditorType = 'username';
 
   get showNameEditor() {
     return this.editor === 'username';
+
   }
 
   get showProfileEditor() {
@@ -21,10 +22,16 @@ export class AppComponent {
   toggleEditor(type: EditorType) {
     this.editor = type;
   }
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
+  constructor(private spinner: NgxSpinnerService) {}
+
+  ngOnInit() {
+    /** spinner starts on init */
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
   }
-  useLanguage(language: string): void {
-    this.translate.use(language);
-  }
+
 }
