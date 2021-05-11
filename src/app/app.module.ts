@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogInFormComponent } from './form-LogIn/form-LogIn.component';
@@ -9,10 +8,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormRegistrationComponent } from './form-registration/form-registration.component';
+import { AppRoutingModule } from './app-routing.module';
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
-    LogInFormComponent
+    LogInFormComponent,
+    FormRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

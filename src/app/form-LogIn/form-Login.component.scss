@@ -1,0 +1,156 @@
+$desktop:2000px;
+$laptop:1024px;
+$tablet:768px;
+$mobile:480px;
+input{
+  font-family: 'Raleway';
+  width: 80%;
+  height: 30px;
+  display: block;
+  color: #757575;
+  border-radius: 30px;
+  border: 2px solid #edf8ff;
+  background-color: #fafafa;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  padding-left:40px;
+  font-size: 14px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    height: 55px;
+    padding-left:50px;
+    background-position: 15px 15px;
+    background-size: 25px 25px;
+    font-size: 16px;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    height: 45px;
+    background-position: 12px 12px;
+    background-size: 22px 22px;
+    font-size: 16px;
+  }
+}
+input:focus{
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}
+.inputPass{
+  background-image: url(/assets/ikone/lock.gif);
+}
+.inputUser{
+  background-image: url(/assets/ikone/user.gif);
+}
+
+.users{
+  width: 80%;
+  height: 35%;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    width: 65%;
+    height: 35%;
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    width: 60%;
+    height: 60%;
+    margin-left: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.LogInButton{
+  color: #fafafa;
+  font-family: 'Raleway';
+  background-color: #00a3e0;
+  border-radius: 30px;
+  border: 2px solid #00a3e0;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-left: 60px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    height:50px;
+    width:30%;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 120px;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    height:50px;
+    width:35%;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 90px;
+  }
+  @media screen and (max-width:$tablet) and (min-width:$mobile)
+  {
+    height:42px;
+    width:52%;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 50px;
+  }
+}
+.LogInButton:hover{
+  background-color: #24afe3;
+}
+.LogInButton:active{
+  background-color: #24afe3;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}
+.LogInButton:focus{
+  outline: none !important;
+}
+
+.wrong{
+  width: 90%;
+  height: 35%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color:#00a3e0;
+  font-weight: bold;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    font-size: 16px;
+
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    font-size: 16px;
+  }
+}
+select{
+  margin-top: 10px;
+  margin-left: 10px;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+  font-family: 'Raleway';
+  color: #757575;
+  border-radius: 30px;
+
+
+
+}
+select:focus{
+  border: 1px solid #00a3e0;
+  background-color: #fafafa;
+}

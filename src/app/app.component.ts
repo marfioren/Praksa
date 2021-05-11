@@ -8,20 +8,7 @@ export type EditorType = 'username' | 'profile';
 })
 export class AppComponent{
   title = 'LogIn';
-  editor: EditorType = 'username';
 
-  get showNameEditor() {
-    return this.editor === 'username';
-
-  }
-
-  get showProfileEditor() {
-    return this.editor === 'profile';
-  }
-
-  toggleEditor(type: EditorType) {
-    this.editor = type;
-  }
   constructor(private spinner: NgxSpinnerService) {}
 
   ngOnInit() {

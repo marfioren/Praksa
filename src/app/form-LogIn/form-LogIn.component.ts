@@ -5,12 +5,11 @@ import { UserAuth } from '../security/user-auth';
 import { User } from '../security/users';
 import { SecurityService } from '../security/security.service';
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-form-LogIn',
   templateUrl: './form-LogIn.component.html',
-  styleUrls: ['./form-LogIn.component.css']
+  styleUrls: ['./form-Login.component.scss']
 })
-export class LogInFormComponent {
+export class LogInFormComponent{
 
   user: User = new User();
   securityObject: UserAuth = null;
@@ -50,6 +49,8 @@ export class LogInFormComponent {
     translate.addLangs(['en', 'hr']);
     translate.setDefaultLang('en');
   }
+
+
 
   switchLang(lang: string) {
     this.translate.use(lang);
