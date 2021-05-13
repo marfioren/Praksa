@@ -3,5 +3,7 @@
   "pass": "Password",
   "button": "Log in",
   "usernameWarning": "Username must be at least 7 characters long.",
-  "passWarning": "Password must be at least 8 characters long."
+  "passWarning": "Password must be at least 8 characters long.",
+  "passConfWarning": "Wrong password.",
+  "mailWarning": "Invalid mail."
 }

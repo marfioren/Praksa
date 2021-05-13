@@ -1,1 +1,50 @@
-<p>form-registration works!</p>
+<form [formGroup]="RegistrationForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    <div class="wrong" *ngIf="securityObject && !securityObject.isAuthenticated">
+      {{'usernameError' | translate }}
+    </div>
+    <div *ngIf="username.invalid" class="wrong">
+      <div *ngIf="username.errors.minlength">
+        {{'usernameWarning' | translate }}
+      </div>
+    </div>
+    <input type="text" formControlName="username" class="inputUser" value="username" required (focus)="onFocusEventUser($event)" required >
+
+  </label>
+  <p></p>
+  <label>
+    <div *ngIf="mail.invalid" class="wrong">
+      <div *ngIf="mail.hasError('pattern')">
+        {{'mailWarning' | translate }}
+      </div>
+    </div>
+    <input type="text" formControlName="mail" class="inputUser" value="mail" (focus)="onFocusEventMail($event)" required >
+  </label>
+  <p></p>
+  <label>
+    <div *ngIf="password.invalid" class="wrong">
+      <div *ngIf="password.errors.minlength">
+        {{'passWarning' | translate }}
+      </div>
+    </div>
+    <input type="{{typeInput}}" formControlName="password" class="inputPass" value="password" (focus)="onFocusEventPass($event)" required >
+  </label>
+  <p></p>
+  <label>
+    <div *ngIf="wrongPass" class="wrong">
+        {{'passConfWarning' | translate }}
+    </div>
+    <input type="{{typeInput}}" formControlName="confPassword" class="inputPass" value="Confirm password" (focus)="onFocusEventConfPass($event)" (keyup)="onKeypressEvent($event)" required >
+  </label>
+  <span>
+      <select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+                [selected]="language === translate.currentLang">
+          {{ language }}
+        </option>
+      </select>
+    </span>
+  <p></p>
+  <button type="submit" [disabled]="!RegistrationForm.valid" class="RegButton">{{'button' | translate }}</button>
+</form>

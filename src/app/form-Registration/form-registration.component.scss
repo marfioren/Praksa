@@ -118,56 +118,8 @@ input:focus{
 .LogInButton:focus{
   outline: none !important;
 }
-.RegButton{
-  color: #fafafa;
-  font-family: 'Raleway';
-  background-color: #00a3e0;
-  border-radius: 30px;
-  border: 2px solid #00a3e0;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-left: 60px;
-  @media screen and (max-width:$desktop) and (min-width:$laptop)
-  {
-    height:50px;
-    width:40%;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-left: 110px;
-  }
-  @media screen and (max-width:$laptop) and (min-width:$tablet)
-  {
-    height:50px;
-    width:45%;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-left: 90px;
-  }
-  @media screen and (max-width:$tablet) and (min-width:$mobile)
-  {
-    height:42px;
-    width:62%;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-left: 50px;
-  }
-}
-.RegButton:hover{
-  background-color: #24afe3;
-}
-.RegButton:active{
-  background-color: #24afe3;
-  outline: none !important;
-  border-color: #719ECE;
-  box-shadow: 0 0 10px #719ECE;
-}
-.RegButton:focus{
-  outline: none !important;
-}
+
+
 .wrong{
   width: 90%;
   height: 35%;
