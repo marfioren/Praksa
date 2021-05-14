@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {AbstractControl, ValidatorFn} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import { UserAuth } from '../security/user-auth';
+import { UserFirebase } from '../security/User-firebase';
 import { RegistrationService } from '../security/registration.service';
+import { UserService } from '../security/user.service';
 @Component({
   selector: 'app-form-registration',
   templateUrl: './form-registration.component.html',
@@ -12,7 +13,7 @@ import { RegistrationService } from '../security/registration.service';
 export class FormRegistrationComponent{
   user: UserAuth = new UserAuth();
   securityObject: UserAuth = null;
-
+  myArray: any[] = []
   RegistrationForm = new FormGroup({
     username: new FormControl('Username',[Validators.required, Validators.minLength(7)]),
     password: new FormControl('Password', [Validators.required, Validators.minLength(8)]),
@@ -40,11 +41,11 @@ export class FormRegistrationComponent{
   }
 
   onSubmit() {
+    this.getData();
     if(!this.wrongPass) {
       this.user.Username = this.RegistrationForm.value.username;
       this.user.Mail = this.RegistrationForm.value.mail;
       this.user.Password = this.RegistrationForm.value.password;
-      this.registration();
     }
   }
   // tslint:disable-next-line:typedef
@@ -73,9 +74,15 @@ export class FormRegistrationComponent{
   }
   registration() {
    this.registrationService.setItem(this.user.Username, JSON.stringify(this.user))
+    this.registrationService.SendVerificationMail(this.user.Mail, this.user.Password);
+
+  }
+  getData(){
+    this.myArray=this.userService.getUserList();
+    console.log(this.myArray);
   }
   constructor(
-    public translate: TranslateService, private registrationService: RegistrationService
+    public translate: TranslateService, private registrationService: RegistrationService, private userService: UserService
   ) {
     translate.addLangs(['en', 'hr']);
     translate.setDefaultLang('en');

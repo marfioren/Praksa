@@ -1,13 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
-import { UserAuth } from './user-auth';
-import { LOGIN_MOCKS } from './test-users';
+import { Injectable, NgZone } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth,
+                public router: Router,
+                public ngZone: NgZone){}
+
+SendVerificationMail(mail: string, pass:string) {
+  this.afAuth.createUserWithEmailAndPassword(mail, pass)
+    .then((result) => {
+      result.user.sendEmailVerification();
+
+    }).catch((error) => {
+    window.alert(error.message)
+  });
+  }
   public setItem(key: string, value: string) {
     localStorage.setItem(key, value);
   }
