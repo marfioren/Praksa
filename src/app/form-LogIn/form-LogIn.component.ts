@@ -11,9 +11,10 @@ import { UserService } from '../security/user.service';
 export class LogInFormComponent{
   user: UserFirebase = new UserFirebase();
   User: any
+  wrongCredentials:boolean;
   LogInForm = new FormGroup({
-    username: new FormControl('Username',[Validators.required, Validators.minLength(7)]),
-    password: new FormControl('Password', [Validators.required, Validators.minLength(8)]),
+    username: new FormControl('Username'),
+    password: new FormControl('Password'),
   });
   typeInput: string;
   // tslint:disable-next-line:typedef
@@ -22,8 +23,8 @@ export class LogInFormComponent{
   get password(){return this.LogInForm.get('password'); }
   // tslint:disable-next-line:typedef
   onSubmit() {
-    //this.user.id=this.LogInForm.value.username;
-    //this.user.password=this.LogInForm.value.password;
+    this.user.id=this.LogInForm.value.username;
+    this.user.password=this.LogInForm.value.password;
     this.login();
   }
   // tslint:disable-next-line:typedef
@@ -36,12 +37,18 @@ export class LogInFormComponent{
     this.typeInput = 'password';
   }
   login() {
-   this.userService.getUserDoc("user1").then(son => {
+   this.userService.getUserDoc(this.user.id).then(son => {
        this.User=this.userService.getUser();
+       if(this.User.username==this.user.id&&this.User.password==this.user.password){
+       console.log("Korisnik ulogiran");
+         this.wrongCredentials=false;}
+       else{
+         this.wrongCredentials=true;
 
+       }
      }
    )
-   console.log(this.user.id);
+
   }
   constructor(
     public translate: TranslateService, private userService: UserService
