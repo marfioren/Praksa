@@ -2,7 +2,7 @@
 <form [formGroup]="LogInForm" (ngSubmit)="onSubmit()">
 
   <label>
-    <div class="wrong" *ngIf="securityObject && !securityObject.isAuthenticated">
+    <div class="wrong" *ngIf="">
       {{'usernameError' | translate }}
     </div>
     <div *ngIf="username.invalid" class="wrong">

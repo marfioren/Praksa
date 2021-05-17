@@ -10,15 +10,15 @@
 <form [formGroup]="RegistrationForm" (ngSubmit)="onSubmit()">
 
   <label>
-    <div class="wrong" *ngIf="securityObject && !securityObject.isAuthenticated">
-      {{'usernameError' | translate }}
-    </div>
     <div *ngIf="username.invalid" class="wrong">
       <div *ngIf="username.errors.minlength">
         {{'usernameWarning' | translate }}
       </div>
     </div>
-    <input type="text" formControlName="username" class="inputUser" value="username" required (focus)="onFocusEventUser($event)" required >
+    <div *ngIf="usedUsername" class="wrong">
+      {{'usernameUsed' | translate }}
+    </div>
+    <input type="text" formControlName="username" class="inputUser" value="username" (focus)="onFocusEventUser($event)" (keyup)="onKeypressEventUser($event)" required >
 
   </label>
   <p></p>
@@ -44,7 +44,7 @@
     <div *ngIf="wrongPass" class="wrong">
         {{'passConfWarning' | translate }}
     </div>
-    <input type="{{typeInput}}" formControlName="confPassword" class="inputPass" value="Confirm password" (focus)="onFocusEventConfPass($event)" (keyup)="onKeypressEvent($event)" required >
+    <input type="{{typeInput}}" formControlName="confPassword" class="inputPass" value="Confirm password" (focus)="onFocusEventConfPass($event)" (keyup)="onKeypressEventPass($event)" required >
   </label>
   <span>
       <select #selectedLang (change)="switchLang(selectedLang.value)">
@@ -55,6 +55,6 @@
       </select>
     </span>
   <p></p>
-  <button type="submit" [disabled]="!RegistrationForm.valid" class="RegButton">{{'button' | translate }}</button>
+  <button type="submit" [disabled]="!RegistrationForm.valid||this.wrongPass||this.usedUsername||!this.click[0]||!this.click[1]||!this.click[2]||!this.click[3]" class="RegButton">{{'button' | translate }}</button>
 </form>
 

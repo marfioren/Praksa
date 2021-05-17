@@ -4,4 +4,5 @@ export class UserFirebase {
   isMailConfirmed: boolean;
   mail:string;
   password: string;
+
 }

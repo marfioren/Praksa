@@ -3,6 +3,7 @@
   "pass": "Lozinka",
   "button": "Prijava",
   "usernameWarning": "Mora sadržavati min. 7 znakova",
+  "usernameUsed": "Korisničko ime se već koristi.",
   "passWarning": "Mora sadržavati min. 8 znakova",
   "passConfWarning": "Pogrešna lozinka.",
   "mailWarning": "Pogrešno upisan mail."

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import { UserAuth } from '../security/user-auth';
 import { UserFirebase } from '../security/User-firebase';
 import { RegistrationService } from '../security/registration.service';
 import { UserService } from '../security/user.service';
@@ -10,10 +9,14 @@ import { UserService } from '../security/user.service';
   templateUrl: './form-registration.component.html',
   styleUrls: ['./form-registration.component.scss']
 })
-export class FormRegistrationComponent{
-  user: UserAuth = new UserAuth();
-  securityObject: UserAuth = null;
-  myArray: any[] = []
+export class FormRegistrationComponent implements OnInit {
+  user: UserFirebase= new UserFirebase();
+  typeInput: string;
+  click=[false, false, false, false];
+  wrongPass: boolean;
+  usedUsername: boolean;
+  myArray: any[];
+  Users: string[]=[];
   RegistrationForm = new FormGroup({
     username: new FormControl('Username',[Validators.required, Validators.minLength(7)]),
     password: new FormControl('Password', [Validators.required, Validators.minLength(8)]),
@@ -21,8 +24,7 @@ export class FormRegistrationComponent{
     mail: new FormControl('mail@mail.com', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
   }
   );
-  typeInput: string;
-  wrongPass: boolean;
+
   // tslint:disable-next-line:typedef
   get username() { return this.RegistrationForm.get('username'); }
   // tslint:disable-next-line:typedef
@@ -40,46 +42,76 @@ export class FormRegistrationComponent{
       }
   }
 
+  checkUsername(username:string){
+    if(this.Users.includes(username)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   onSubmit() {
-    this.getData();
-    if(!this.wrongPass) {
-      this.user.Username = this.RegistrationForm.value.username;
-      this.user.Mail = this.RegistrationForm.value.mail;
-      this.user.Password = this.RegistrationForm.value.password;
+    if(!this.wrongPass&&!this.usedUsername) {
+      this.user.id = this.RegistrationForm.value.username;
+      this.user.mail = this.RegistrationForm.value.mail;
+      this.user.password = this.RegistrationForm.value.password;
+      this.user.isAuthenticated=false;
+      this.user.isMailConfirmed=false;
+      this.registration();
+      localStorage.clear();
     }
   }
   // tslint:disable-next-line:typedef
   onFocusEventUser(event: any){
     this.RegistrationForm.get('username').reset('');
+    this.click[0]=true;
   }
   // tslint:disable-next-line:typedef
   onFocusEventMail(event: any){
     this.RegistrationForm.get('mail').reset('');
+    this.click[1]=true;
   }
   // tslint:disable-next-line:typedef
   onFocusEventPass(event: any){
     this.RegistrationForm.get('confPassword').reset('');
     this.RegistrationForm.get('password').reset('');
     this.typeInput = 'password';
+    this.click[2]=true;
   }
   onFocusEventConfPass(event: any){
     this.wrongPass=this.checkPass(this.RegistrationForm.value.password, this.RegistrationForm.value.confPassword);
-    console.log(this.wrongPass);
     this.typeInput = 'password';
+    this.click[3]=true;
   }
-  onKeypressEvent(event: any){
+  onKeypressEventPass(event: any){
     this.wrongPass=this.checkPass(this.RegistrationForm.value.password, this.RegistrationForm.value.confPassword);
-    console.log(this.wrongPass);
-
+  }
+  onKeypressEventUser(event: any){
+    this.usedUsername=this.checkUsername(this.RegistrationForm.value.username);
   }
   registration() {
-   this.registrationService.setItem(this.user.Username, JSON.stringify(this.user))
-    this.registrationService.SendVerificationMail(this.user.Mail, this.user.Password);
+   this.userService.createUser(this.user);
+   // this.registrationService.SendVerificationMail(this.user.Mail, this.user.Password);
 
   }
   getData(){
-    this.myArray=this.userService.getUserList();
-    console.log(this.myArray);
+
+    this.userService.getUserList().then(son => {
+      this.myArray=this.userService.getArray();
+      var iterator= this.myArray.values();
+      for(let i of iterator){
+        this.Users.push(i.username);
+      }
+    }
+    )
+
+  }
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
+  ngOnInit() {
+    this.getData();
   }
   constructor(
     public translate: TranslateService, private registrationService: RegistrationService, private userService: UserService
@@ -89,8 +121,4 @@ export class FormRegistrationComponent{
   }
 
 
-
-  switchLang(lang: string) {
-    this.translate.use(lang);
-  }
 }
