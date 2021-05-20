@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { FormArduinoDataComponent } from './form-ArduinoData/form-arduino-data.component';
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -23,7 +24,8 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     LogInFormComponent,
-    FormRegistrationComponent
+    FormRegistrationComponent,
+    FormArduinoDataComponent
   ],
   imports: [
     BrowserModule,
