@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import { UserFirebase } from '../security/User-firebase';
 import { UserService } from '../security/user.service';
+
 @Component({
   selector: 'app-form-LogIn',
   templateUrl: './form-LogIn.component.html',
@@ -41,7 +42,8 @@ export class LogInFormComponent{
        this.User=this.userService.getUser();
        if(this.User.username==this.user.id&&this.User.password==this.user.password){
        console.log("Korisnik ulogiran");
-         this.wrongCredentials=false;}
+         this.wrongCredentials=false;
+       }
        else{
          this.wrongCredentials=true;
 
