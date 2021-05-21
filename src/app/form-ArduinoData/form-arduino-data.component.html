@@ -10,3 +10,11 @@
 <div>
   <button  class="LogInButton" (click)="ShowHistory()">Show history data</button>
 </div>
+<table mat-table *ngIf="history" [dataSource]="TemperatureHistTable">
+  <ng-container matColumnDef="Temp">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+</table>

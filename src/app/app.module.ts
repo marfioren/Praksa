@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { FormArduinoDataComponent } from './form-ArduinoData/form-arduino-data.component';
+import {MatTableModule} from '@angular/material/table';
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -29,6 +30,7 @@ import { FormArduinoDataComponent } from './form-ArduinoData/form-arduino-data.c
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,

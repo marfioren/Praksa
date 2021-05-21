@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ArduinoFirebase } from '../security/Arduino-firebase';
 import { ArduinoDataService } from '../security/arduino-data.service';
+import {MatTableModule} from '@angular/material/table';
 @Component({
   selector: 'app-form-arduino-data',
   templateUrl: './form-arduino-data.component.html',
@@ -8,10 +10,15 @@ import { ArduinoDataService } from '../security/arduino-data.service';
 export class FormArduinoDataComponent implements OnInit {
   TemperatureCurrArray: any[]=[];
   TemperatureHistArray: any[]=[];
+  TemperatureHistTable: ArduinoFirebase[]=[
+    {data: 'bla', time: 'bla'},
+  ];
   HumidityCurrArray: any[]=[];
+  tableColumns  :  string[] = ['data', 'time'];
   TemperatureCurr: string;
   HumidityCurr: string;
   interval: any;
+  history:boolean=false;
   constructor(private arduinoDataService: ArduinoDataService) { }
 
   ngOnInit(): void {
@@ -37,9 +44,12 @@ export class FormArduinoDataComponent implements OnInit {
     this.arduinoDataService.fillHistTempData().then(son => {
       this.TemperatureHistArray=this.arduinoDataService.getHistTemp();
       for(var i=0; i<this.TemperatureHistArray.length;i++){
-        console.log(this.TemperatureHistArray[i].time);
+        /*var dat: ArduinoFirebase;
+        dat.data=this.TemperatureHistArray[i].data;
+        dat.time=this.TemperatureHistArray[i].time;
+        this.TemperatureHistTable.push(dat);*/
       }
-
+      this.history=true;
     })
 
   }

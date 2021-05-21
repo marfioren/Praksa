@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ArduinoFirebase } from '../security/Arduino-firebase';
+
 @Injectable({
   providedIn: 'root'
 })
