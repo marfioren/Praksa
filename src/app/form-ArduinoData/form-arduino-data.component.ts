@@ -11,7 +11,6 @@ export class FormArduinoDataComponent implements OnInit {
   TemperatureCurrArray: any[]=[];
   TemperatureHistArray: any[]=[];
   TemperatureHistTable: ArduinoFirebase[]=[
-    {data: 'bla', time: 'bla'},
   ];
   HumidityCurrArray: any[]=[];
   tableColumns  :  string[] = ['data', 'time'];
@@ -44,10 +43,12 @@ export class FormArduinoDataComponent implements OnInit {
     this.arduinoDataService.fillHistTempData().then(son => {
       this.TemperatureHistArray=this.arduinoDataService.getHistTemp();
       for(var i=0; i<this.TemperatureHistArray.length;i++){
-        /*var dat: ArduinoFirebase;
-        dat.data=this.TemperatureHistArray[i].data;
-        dat.time=this.TemperatureHistArray[i].time;
-        this.TemperatureHistTable.push(dat);*/
+        if(this.TemperatureHistArray[i].data) {
+          var dat: ArduinoFirebase={data: 'bla', time: 'bla'};
+          dat.data = this.TemperatureHistArray[i].data;
+          dat.time = this.TemperatureHistArray[i].time;
+          this.TemperatureHistTable.push(dat);
+        }
       }
       this.history=true;
     })

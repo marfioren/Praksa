@@ -1,4 +1,4 @@
-export interface ArduinoFirebase {
+export class ArduinoFirebase {
   data: string;
   time:string;
 
