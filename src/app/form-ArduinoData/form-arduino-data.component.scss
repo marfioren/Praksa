@@ -1,0 +1,132 @@
+$desktop:2000px;
+$laptop:1024px;
+$tablet:768px;
+$mobile:480px;
+
+::ng-deep .glavni-div
+{
+  margin: 0 auto;
+  max-width: 250px;
+  height: 300px;
+  background-color: transparent;
+  border-radius: 3px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    max-width: 800px;
+    height: auto;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    max-width: 700px;
+    height: auto;
+  }
+}
+::ng-deep .sredisnji-div{
+  margin: 0 auto;
+  padding-top: 20px;
+  max-width: 250px;
+  height: 250px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    max-width: 800px;
+    height: auto;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    max-width: 700px;
+    height: auto;
+  }
+}
+
+.graph{
+  padding-top: 20px;
+  display:inline-block;
+  width: 50%;
+  max-height:300px;
+  @media screen and (max-width:$tablet)
+  {
+    padding-top: 0px;
+    display:inline-block;
+    max-height:250px;
+    overflow-x: auto;
+    width: 100%;
+  }
+}
+.matTable{
+  display:inline-block;
+  margin-top: 20px;
+  width: 40%;
+  max-height:300px;
+  overflow: auto;
+  overflow-x: hidden;
+  @media screen and (max-width:$tablet)
+  {
+    max-height:200px;
+    width: 200px;
+    overflow-x: auto;
+    display:inline-block;
+  }
+}
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 10px 10px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.LogInButton{
+  color: #fafafa;
+  margin-top: 10px;
+  font-family: 'Raleway';
+  background-color: #00a3e0;
+  border-radius: 30px;
+  border: 2px solid #00a3e0;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-left: 60px;
+  @media screen and (max-width:$desktop) and (min-width:$laptop)
+  {
+    height:50px;
+    width:30%;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 120px;
+  }
+  @media screen and (max-width:$laptop) and (min-width:$tablet)
+  {
+    height:50px;
+    width:35%;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 90px;
+  }
+  @media screen and (max-width:$tablet) and (min-width:$mobile)
+  {
+    height:42px;
+    width:52%;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 50px;
+  }
+}
+.LogInButton:hover{
+  background-color: #24afe3;
+}
+.LogInButton:active{
+  background-color: #24afe3;
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}
+.LogInButton:focus{
+  outline: none !important;
+}

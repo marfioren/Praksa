@@ -2,22 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { ArduinoFirebase } from '../security/Arduino-firebase';
 import { ArduinoDataService } from '../security/arduino-data.service';
 import {MatTableModule} from '@angular/material/table';
+import { EChartsOption } from 'echarts';
+import * as echarts from 'echarts';
 @Component({
   selector: 'app-form-arduino-data',
   templateUrl: './form-arduino-data.component.html',
-  styleUrls: ['./form-arduino-data.component.css']
+  styleUrls: ['./form-arduino-data.component.scss']
 })
 export class FormArduinoDataComponent implements OnInit {
+
   TemperatureCurrArray: any[]=[];
   TemperatureHistArray: any[]=[];
-  TemperatureHistTable: ArduinoFirebase[]=[
-  ];
+  TemperatureHistTable: ArduinoFirebase[]=[];
+
   HumidityCurrArray: any[]=[];
+  HumidityHistArray: any[]=[];
+  HumidityHistTable: ArduinoFirebase[]=[];
+
   tableColumns  :  string[] = ['data', 'time'];
   TemperatureCurr: string;
   HumidityCurr: string;
   interval: any;
   history:boolean=false;
+  GraphTempTime: string[]=[];
+  GraphTempData: number[]=[];
+  GraphHumData: number[]=[];
   constructor(private arduinoDataService: ArduinoDataService) { }
 
   ngOnInit(): void {
@@ -47,7 +56,23 @@ export class FormArduinoDataComponent implements OnInit {
           var dat: ArduinoFirebase={data: 'bla', time: 'bla'};
           dat.data = this.TemperatureHistArray[i].data;
           dat.time = this.TemperatureHistArray[i].time;
+          this.GraphTempData.push(Number(dat.data));
           this.TemperatureHistTable.push(dat);
+        }
+      }
+    })
+
+    this.arduinoDataService.fillHistHumData().then(son => {
+      this.HumidityHistArray=this.arduinoDataService.getHistHum();
+      for(var i=0; i<this.HumidityHistArray.length;i++){
+        if(this.HumidityHistArray[i].data) {
+          if(Number(this.HumidityHistArray[i].data)<101) {
+            var dat: ArduinoFirebase={data: 'bla', time: 'bla'};
+            dat.data = this.HumidityHistArray[i].data;
+            dat.time = this.HumidityHistArray[i].time;
+            this.GraphHumData.push(Number(dat.data));
+            this.HumidityHistTable.push(dat);
+          }
         }
       }
       this.history=true;
@@ -56,8 +81,52 @@ export class FormArduinoDataComponent implements OnInit {
   }
 
   ShowHistory(){
-
     this.getHistoryData();
+
+  }
+  CloseHistory(){
+    this.history=false;
+    this.TemperatureHistArray.length=0;
+    this.GraphTempData.length=0;
+  }
+  RefreshHistory(){
+    this.history=false;
+    this.TemperatureHistArray.length=0;
+    this.GraphTempData.length=0;
+    this.getHistoryData();
+  }
+
+
+  chartOptionTemp: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: []
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      data: this.GraphTempData,
+      type: 'line',
+      areaStyle: {}
+    }]
+  }
+
+  chartOptionHum: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: []
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      data: this.GraphHumData,
+      type: 'line',
+      areaStyle: {}
+    }]
   }
 
 }

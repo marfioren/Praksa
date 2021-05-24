@@ -17,6 +17,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { FormArduinoDataComponent } from './form-ArduinoData/form-arduino-data.component';
 import {MatTableModule} from '@angular/material/table';
+import { NgxEchartsModule } from 'ngx-echarts';
+import {MatPaginatorModule} from '@angular/material/paginator';
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -40,13 +42,17 @@ import {MatTableModule} from '@angular/material/table';
     AngularFirestoreModule,
     AppRoutingModule,
     AngularFireStorageModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

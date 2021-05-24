@@ -8,17 +8,43 @@
 </div>
 <p></p>
 <div>
-  <button  class="LogInButton" (click)="ShowHistory()">Show history data</button>
+  <button *ngIf="!history" class="LogInButton" (click)="ShowHistory()">History data</button>
 </div>
-<table mat-table *ngIf="history" [dataSource]="TemperatureHistTable" class="matTable">
+<div>
+  <button class="LogInButton" *ngIf="history" (click)="RefreshHistory()">Refresh</button>
+  <button class="LogInButton" *ngIf="history" (click)="CloseHistory()">Close</button>
+</div>
+<p *ngIf="history">Temperature history: </p>
+<div *ngIf="history" class="matTable">
+<table mat-table [dataSource]="TemperatureHistTable">
   <ng-container matColumnDef="data">
-    <th mat-header-cell *matHeaderCellDef> Temp. </th>
-    <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+    <th mat-header-cell *matHeaderCellDef> Temperature </th>
+    <td mat-cell *matCellDef="let element"> {{element.data}} °C</td>
   </ng-container>
   <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef> Time. </th>
+    <th mat-header-cell *matHeaderCellDef> Time </th>
     <td mat-cell *matCellDef="let element"> {{element.time}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
 </table>
+</div>
+<div echarts *ngIf="history" [options]="chartOptionTemp" class="graph"></div>
+
+
+<p *ngIf="history">Humidity history: </p>
+<div class *ngIf="history" class="matTable">
+  <table mat-table [dataSource]="HumidityHistTable">
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef> Humidity </th>
+      <td mat-cell *matCellDef="let element"> {{element.data}} %</td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+  </table>
+</div>
+<div id="chart" echarts *ngIf="history" [options]="chartOptionHum" class="graph"></div>

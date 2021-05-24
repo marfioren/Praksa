@@ -76,6 +76,34 @@ export class ArduinoDataService {
     });
     return this.TemperatureHistory;
   }
+
+  //get humidity history data
+
+  fillHistHumData() {
+    this.TemperatureHistory.length=0;
+    return this.getDataFromFirebase("HumHistory")
+      .then((ss) => {
+          ss.docs.forEach((doc) => {
+            this.HumidityHistory.push(doc.data());
+          });
+        }
+      )
+      .catch(err => {
+        console.log(err);
+      });
+
+  }
+  getHistHum(){
+    this.HumidityHistory= this.HumidityHistory.sort((t1, t2) => {
+      const time1 = Number(t1.timestamp);
+      const time2 = Number(t2.timestamp);
+      if (time1 > time2) { return 1; }
+      if (time1 < time2) { return -1; }
+      return 0;
+    });
+    return this.HumidityHistory;
+  }
+
   //retrieves data from database
   getDataFromFirebase(coll: string){
     return this.angularFirestore
