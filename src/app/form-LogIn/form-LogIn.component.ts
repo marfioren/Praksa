@@ -3,13 +3,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import { UserFirebase } from '../security/User-firebase';
 import { UserService } from '../security/user.service';
-
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-form-LogIn',
   templateUrl: './form-LogIn.component.html',
   styleUrls: ['./form-Login.component.scss']
 })
-export class LogInFormComponent{
+export class LogInFormComponent implements OnInit{
   user: UserFirebase = new UserFirebase();
   User: any
   wrongCredentials:boolean;
@@ -40,12 +41,18 @@ export class LogInFormComponent{
   login() {
    this.userService.getUserDoc(this.user.id).then(son => {
        this.User=this.userService.getUser();
-       if(this.User.username==this.user.id&&this.User.password==this.user.password){
-       console.log("Korisnik ulogiran");
-         this.wrongCredentials=false;
+       if(this.User) {
+         if (this.User.username == this.user.id && this.User.password == this.user.password) {
+           this.wrongCredentials = false;
+           this.cookieService.set( 'username', this.User.username);
+           this.router.navigateByUrl('/ArduinoData');
+         } else {
+           this.wrongCredentials = true;
+
+         }
        }
        else{
-         this.wrongCredentials=true;
+         this.wrongCredentials = true;
 
        }
      }
@@ -53,7 +60,7 @@ export class LogInFormComponent{
 
   }
   constructor(
-    public translate: TranslateService, private userService: UserService
+    public translate: TranslateService, private userService: UserService, private router: Router, private cookieService: CookieService
   ) {
     translate.addLangs(['en', 'hr']);
     translate.setDefaultLang('en');
@@ -64,5 +71,7 @@ export class LogInFormComponent{
   switchLang(lang: string) {
     this.translate.use(lang);
   }
+  ngOnInit() {
 
+  }
 }

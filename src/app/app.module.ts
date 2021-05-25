@@ -19,6 +19,7 @@ import { FormArduinoDataComponent } from './form-ArduinoData/form-arduino-data.c
 import {MatTableModule} from '@angular/material/table';
 import { NgxEchartsModule } from 'ngx-echarts';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { CookieService } from 'ngx-cookie-service';
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -54,7 +55,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     }),
     MatPaginatorModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

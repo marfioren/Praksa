@@ -1,5 +1,6 @@
-
+<p><button class="LogInButton" style="background-color:#9fcaf5; border: none; color: #00a3e0;" (click)="Logout()">Log out</button></p>
 <div>
+
   Current temperature: {{TemperatureCurr}} °C
 </div>
 <p></p>
@@ -8,6 +9,7 @@
 </div>
 <p></p>
 <div>
+
   <button *ngIf="!history" class="LogInButton" (click)="ShowHistory()">History data</button>
 </div>
 <div>

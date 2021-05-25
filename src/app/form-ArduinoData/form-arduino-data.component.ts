@@ -3,6 +3,8 @@ import { ArduinoFirebase } from '../security/Arduino-firebase';
 import { ArduinoDataService } from '../security/arduino-data.service';
 import {MatTableModule} from '@angular/material/table';
 import { EChartsOption } from 'echarts';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 import * as echarts from 'echarts';
 @Component({
   selector: 'app-form-arduino-data',
@@ -27,15 +29,30 @@ export class FormArduinoDataComponent implements OnInit {
   GraphTempTime: string[]=[];
   GraphTempData: number[]=[];
   GraphHumData: number[]=[];
-  constructor(private arduinoDataService: ArduinoDataService) { }
+  cookieValue:string;
+  constructor(private arduinoDataService: ArduinoDataService, private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
+    this.cookieValue = this.cookieService.get('username');
+    if(this.cookieValue) {
+      console.log(this.cookieValue);
+    }
+    else{
+      this.router.navigateByUrl('/LogIn');
+
+    }
+
     this.TemperatureCurr=" ";
     this.HumidityCurr=" ";
     this.updateData();
     this.interval = setInterval(() => {
       this.updateData();
     }, 10000);
+  }
+
+  Logout(){
+    this.cookieService.delete('username');
+    this.router.navigateByUrl('/LogIn');
   }
   updateData(){
     this.arduinoDataService.fillCurrTempData().then(son => {
