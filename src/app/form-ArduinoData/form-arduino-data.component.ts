@@ -6,6 +6,7 @@ import { EChartsOption } from 'echarts';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import * as echarts from 'echarts';
+import {AbstractControl} from '@angular/forms';
 @Component({
   selector: 'app-form-arduino-data',
   templateUrl: './form-arduino-data.component.html',
@@ -13,22 +14,22 @@ import * as echarts from 'echarts';
 })
 export class FormArduinoDataComponent implements OnInit {
 
-  TemperatureCurrArray: any[]=[];
-  TemperatureHistArray: any[]=[];
-  TemperatureHistTable: ArduinoFirebase[]=[];
+  temperatureCurrArray: any[]=[];
+  temperatureHistArray: any[]=[];
+  temperatureHistTable: ArduinoFirebase[]=[];
 
-  HumidityCurrArray: any[]=[];
-  HumidityHistArray: any[]=[];
-  HumidityHistTable: ArduinoFirebase[]=[];
+  humidityCurrArray: any[]=[];
+  humidityHistArray: any[]=[];
+  humidityHistTable: ArduinoFirebase[]=[];
 
   tableColumns  :  string[] = ['data', 'time'];
-  TemperatureCurr: string;
-  HumidityCurr: string;
+  temperatureCurr: string;
+  humidityCurr: string;
   interval: any;
   history:boolean=false;
-  GraphTempTime: string[]=[];
-  GraphTempData: number[]=[];
-  GraphHumData: number[]=[];
+  graphTempTime: string[]=[];
+  graphTempData: number[]=[];
+  graphHumData: number[]=[];
   cookieValue:string;
   constructor(private arduinoDataService: ArduinoDataService, private cookieService: CookieService, private router: Router) { }
 
@@ -42,74 +43,78 @@ export class FormArduinoDataComponent implements OnInit {
 
     }
 
-    this.TemperatureCurr=" ";
-    this.HumidityCurr=" ";
+    this.temperatureCurr=" ";
+    this.humidityCurr=" ";
     this.updateData();
     this.interval = setInterval(() => {
       this.updateData();
     }, 10000);
   }
 
-  Logout(){
+  logOut(): void{
     this.cookieService.delete('username');
     this.router.navigateByUrl('/LogIn');
   }
-  updateData(){
+  updateData(): void{
     this.arduinoDataService.fillCurrTempData().then(son => {
-      this.TemperatureCurrArray=this.arduinoDataService.getCurrTemp();
-      this.TemperatureCurr=this.TemperatureCurrArray[0].data;
+      this.temperatureCurrArray=this.arduinoDataService.getCurrTemp();
+      this.temperatureCurr=this.temperatureCurrArray[0].data;
     })
     this.arduinoDataService.fillCurrHumData().then(son => {
-      this.HumidityCurrArray=this.arduinoDataService.getCurrHum();
-      this.HumidityCurr=this.HumidityCurrArray[0].data;
+      this.humidityCurrArray=this.arduinoDataService.getCurrHum();
+      this.humidityCurr=this.humidityCurrArray[0].data;
     })
   }
 
-  getHistoryData(){
+  getHistoryData(): void{
     this.arduinoDataService.fillHistTempData().then(son => {
-      this.TemperatureHistArray=this.arduinoDataService.getHistTemp();
-      for(var i=0; i<this.TemperatureHistArray.length;i++){
-        if(this.TemperatureHistArray[i].data) {
+      this.temperatureHistArray=this.arduinoDataService.getHistTemp();
+      this.temperatureHistArray.forEach((value) => {
+        if(value.data) {
           var dat: ArduinoFirebase={data: 'bla', time: 'bla'};
-          dat.data = this.TemperatureHistArray[i].data;
-          dat.time = this.TemperatureHistArray[i].time;
-          this.GraphTempData.push(Number(dat.data));
-          this.TemperatureHistTable.push(dat);
+          dat.data = value.data;
+          dat.time = value.time;
+          this.graphTempData.push(Number(dat.data));
+          this.temperatureHistTable.push(dat);
         }
-      }
+      });
     })
 
     this.arduinoDataService.fillHistHumData().then(son => {
-      this.HumidityHistArray=this.arduinoDataService.getHistHum();
-      for(var i=0; i<this.HumidityHistArray.length;i++){
-        if(this.HumidityHistArray[i].data) {
-          if(Number(this.HumidityHistArray[i].data)<101) {
+      this.humidityHistArray=this.arduinoDataService.getHistHum();
+      this.humidityHistArray.forEach((value) => {
+        if(value.data) {
+          if(Number(value.data)<101) {
             var dat: ArduinoFirebase={data: 'bla', time: 'bla'};
-            dat.data = this.HumidityHistArray[i].data;
-            dat.time = this.HumidityHistArray[i].time;
-            this.GraphHumData.push(Number(dat.data));
-            this.HumidityHistTable.push(dat);
+            dat.data = value.data;
+            dat.time = value.time;
+            this.graphHumData.push(Number(dat.data));
+            this.humidityHistTable.push(dat);
           }
         }
-      }
+      });
       this.history=true;
     })
 
   }
 
-  ShowHistory(){
+  showHistory(): void{
     this.getHistoryData();
 
   }
-  CloseHistory(){
+  closeHistory(): void{
     this.history=false;
-    this.TemperatureHistArray.length=0;
-    this.GraphTempData.length=0;
+    this.temperatureHistArray.length=0;
+    this.graphTempData.length=0;
+    this.temperatureHistTable.length=0;
+    this.humidityHistTable.length=0;
   }
-  RefreshHistory(){
+  refreshHistory(): void{
     this.history=false;
-    this.TemperatureHistArray.length=0;
-    this.GraphTempData.length=0;
+    this.temperatureHistArray.length=0;
+    this.graphTempData.length=0;
+    this.temperatureHistTable.length=0;
+    this.humidityHistTable.length=0;
     this.getHistoryData();
   }
 
@@ -124,7 +129,7 @@ export class FormArduinoDataComponent implements OnInit {
       type: 'value'
     },
     series: [{
-      data: this.GraphTempData,
+      data: this.graphTempData,
       type: 'line',
       areaStyle: {}
     }]
@@ -140,7 +145,7 @@ export class FormArduinoDataComponent implements OnInit {
       type: 'value'
     },
     series: [{
-      data: this.GraphHumData,
+      data: this.graphHumData,
       type: 'line',
       areaStyle: {}
     }]

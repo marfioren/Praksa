@@ -5,17 +5,17 @@ import { UserFirebase } from '../security/User-firebase';
   providedIn: 'root'
 })
 export class UserService {
-  Users: any[]=[];
-  User: any
+  users: any[]=[];
+  user: any
   constructor(private angularFirestore: AngularFirestore) { }
 
   //all users
-  getUserList() {
-    this.Users.length=0;
+  getUserList(): Promise<any> {
+    this.users.length=0;
     return this.getDataFromFirebase()
           .then((ss) => {
             ss.docs.forEach((doc) => {
-              this.Users.push(doc.data());
+              this.users.push(doc.data());
             });
           }
           )
@@ -24,39 +24,39 @@ export class UserService {
             });
 
       }
-  getDataFromFirebase(){
+  getDataFromFirebase(): Promise<any>{
     return this.angularFirestore
       .collection("Users")
       .get().toPromise();
   }
-  getArray(){
-    return this.Users;
+  getArray():any{
+    return this.users;
   }
 
 
-  //one user
-  getUserDoc(id) {
+  //one userFirebase
+  getUserDoc(id): Promise<any> {
    return this.getUserFromFirebase(id)
      .then((ss) => {
-         this.User=ss.data();
+         this.user=ss.data();
        }
        )
      .catch(err => {
        console.log(err);
      });
   }
-  getUserFromFirebase(id){
+  getUserFromFirebase(id): Promise<any>{
     return this.angularFirestore
       .collection('Users')
       .doc(id)
       .get().toPromise();
   }
-  getUser(){
-    return this.User;
+  getUser(): any{
+    return this.user;
   }
 
-  //create user
-  createUser(user: UserFirebase) {
+  //create userFirebase
+  createUser(user: UserFirebase): Promise<any> {
     return new Promise<any>((resolve, reject) =>{
       this.angularFirestore
         .collection("Users")

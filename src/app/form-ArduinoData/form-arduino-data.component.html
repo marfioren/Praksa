@@ -1,24 +1,20 @@
-<p><button class="LogInButton" style="background-color:#9fcaf5; border: none; color: #00a3e0;" (click)="Logout()">Log out</button></p>
-<div>
-
-  Current temperature: {{TemperatureCurr}} °C
-</div>
-<p></p>
-<div>
-  Current humidity: {{HumidityCurr}} %
-</div>
-<p></p>
-<div>
-
-  <button *ngIf="!history" class="LogInButton" (click)="ShowHistory()">History data</button>
-</div>
-<div>
-  <button class="LogInButton" *ngIf="history" (click)="RefreshHistory()">Refresh</button>
-  <button class="LogInButton" *ngIf="history" (click)="CloseHistory()">Close</button>
-</div>
+<p><button class="history-button" style="background-color:#9fcaf5; border: none; color: #00a3e0;" (click)="logOut()">Log out</button></p>
+<p>
+  Current temperature: {{temperatureCurr}} °C
+</p>
+<p>
+  Current humidity: {{humidityCurr}} %
+</p>
+<p>
+  <button *ngIf="!history" class="history-button" (click)="showHistory()">History data</button>
+</p>
+<p>
+  <button class="history-button" *ngIf="history" (click)="refreshHistory()">Refresh</button>
+  <button class="history-button" *ngIf="history" (click)="closeHistory()">Close</button>
+</p>
 <p *ngIf="history">Temperature history: </p>
-<div *ngIf="history" class="matTable">
-<table mat-table [dataSource]="TemperatureHistTable">
+<div *ngIf="history" class="material-table">
+<table mat-table [dataSource]="temperatureHistTable">
   <ng-container matColumnDef="data">
     <th mat-header-cell *matHeaderCellDef> Temperature </th>
     <td mat-cell *matCellDef="let element"> {{element.data}} °C</td>
@@ -35,8 +31,8 @@
 
 
 <p *ngIf="history">Humidity history: </p>
-<div class *ngIf="history" class="matTable">
-  <table mat-table [dataSource]="HumidityHistTable">
+<div class *ngIf="history" class="material-table">
+  <table mat-table [dataSource]="humidityHistTable">
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef> Humidity </th>
       <td mat-cell *matCellDef="let element"> {{element.data}} %</td>

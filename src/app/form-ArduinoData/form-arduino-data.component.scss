@@ -52,7 +52,7 @@ $mobile:480px;
     width: 100%;
   }
 }
-.matTable{
+.material-table{
   display:inline-block;
   margin-top: 20px;
   width: 40%;
@@ -79,7 +79,7 @@ $mobile:480px;
   vertical-align: middle;
 }
 
-.LogInButton{
+.history-button{
   color: #fafafa;
   margin-top: 10px;
   font-family: 'Raleway';
@@ -118,15 +118,15 @@ $mobile:480px;
     margin-left: 50px;
   }
 }
-.LogInButton:hover{
+.history-button:hover{
   background-color: #24afe3;
 }
-.LogInButton:active{
+.history-button:active{
   background-color: #24afe3;
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.LogInButton:focus{
+.history-button:focus{
   outline: none !important;
 }

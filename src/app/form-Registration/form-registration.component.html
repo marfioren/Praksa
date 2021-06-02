@@ -1,50 +1,40 @@
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/8.6.1/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/8.6.1/firebase-analytics.js"></script>
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-<form [formGroup]="RegistrationForm" (ngSubmit)="onSubmit()">
-
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" xmlns="http://www.w3.org/1999/html">
   <label>
     <div *ngIf="username.invalid" class="wrong">
-      <div *ngIf="username.errors.minlength">
+      <p *ngIf="username.errors.minlength">
         {{'usernameWarning' | translate }}
-      </div>
+      </p>
     </div>
-    <div *ngIf="usedUsername" class="wrong">
+    <p *ngIf="usedUsername" class="wrong">
       {{'usernameUsed' | translate }}
-    </div>
-    <input type="text" formControlName="username" class="inputUser" value="username" (focus)="onFocusEventUser($event)" (keyup)="onKeypressEventUser($event)" required >
+    </p>
+    <input type="text" formControlName="username" class="input-user" value="username" (focus)="onFocusEventUser($event)" (keyup)="onKeypressEventUser($event)" required >
 
   </label>
-  <p></p>
+  <br/>
   <label>
     <div *ngIf="mail.invalid" class="wrong">
-      <div *ngIf="mail.hasError('pattern')">
+      <p *ngIf="mail.hasError('pattern')">
         {{'mailWarning' | translate }}
-      </div>
+      </p>
     </div>
-    <input type="text" formControlName="mail" class="inputUser" value="mail" (focus)="onFocusEventMail($event)" required >
+    <input type="text" formControlName="mail" class="input-user" value="mail" (focus)="onFocusEventMail($event)" required >
   </label>
-  <p></p>
+  <br/>
   <label>
     <div *ngIf="password.invalid" class="wrong">
-      <div *ngIf="password.errors.minlength">
+      <p *ngIf="password.errors.minlength">
         {{'passWarning' | translate }}
-      </div>
+      </p>
     </div>
-    <input type="{{typeInput}}" formControlName="password" class="inputPass" value="password" (focus)="onFocusEventPass($event)" required >
+    <input type="{{typeInput}}" formControlName="password" class="input-pass" value="password" (focus)="onFocusEventPass($event)" required >
   </label>
-  <p></p>
+  <br/>
   <label>
-    <div *ngIf="wrongPass" class="wrong">
+    <p *ngIf="wrongPass" class="wrong">
         {{'passConfWarning' | translate }}
-    </div>
-    <input type="{{typeInput}}" formControlName="confPassword" class="inputPass" value="Confirm password" (focus)="onFocusEventConfPass($event)" (keyup)="onKeypressEventPass($event)" required >
+    </p>
+    <input type="{{typeInput}}" formControlName="confPassword" class="input-pass" value="Confirm password" (focus)="onFocusEventConfPass($event)" (keyup)="onKeypressEventPass($event)" required >
   </label>
   <span>
       <select #selectedLang (change)="switchLang(selectedLang.value)">
@@ -54,7 +44,7 @@
         </option>
       </select>
     </span>
-  <p></p>
-  <button type="submit" [disabled]="!RegistrationForm.valid||this.wrongPass||this.usedUsername||!this.click[0]||!this.click[1]||!this.click[2]||!this.click[3]" class="RegButton">Registrate</button>
+  <br/>
+  <button type="submit" [disabled]="!registrationForm.valid||this.wrongPass||this.usedUsername||!this.click[0]||!this.click[1]||!this.click[2]||!this.click[3]" class="reg-button">Registrate</button>
 </form>
 

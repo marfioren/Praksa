@@ -71,10 +71,10 @@ input:focus{
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.inputPass{
+.input-pass{
   background-image: url(/assets/ikone/lock.gif);
 }
-.inputUser{
+.input-user{
   background-image: url(/assets/ikone/user.gif);
 }
 
@@ -102,7 +102,7 @@ input:focus{
   }
 }
 
-.LogInButton{
+.login-button{
   color: #fafafa;
   font-family: 'Raleway';
   background-color: #00a3e0;
@@ -140,19 +140,19 @@ input:focus{
     margin-left: 50px;
   }
 }
-.LogInButton:hover{
+.login-button:hover{
   background-color: #24afe3;
 }
-.LogInButton:active{
+.login-button:active{
   background-color: #24afe3;
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.LogInButton:focus{
+.login-button:focus{
   outline: none !important;
 }
-.RegButton{
+.reg-button{
   color: #fafafa;
   font-family: 'Raleway';
   background-color: #00a3e0;
@@ -190,16 +190,16 @@ input:focus{
     margin-left: 50px;
   }
 }
-.RegButton:hover{
+.reg-button:hover{
   background-color: #24afe3;
 }
-.RegButton:active{
+.reg-button:active{
   background-color: #24afe3;
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.RegButton:focus{
+.reg-button:focus{
   outline: none !important;
 }
 .wrong{

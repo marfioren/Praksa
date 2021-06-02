@@ -20,6 +20,7 @@ import {MatTableModule} from '@angular/material/table';
 import { NgxEchartsModule } from 'ngx-echarts';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { CookieService } from 'ngx-cookie-service';
+import {MatSelectModule} from '@angular/material/select';
 // @ts-ignore
 // @ts-ignore
 // @ts-ignore
@@ -53,7 +54,8 @@ import { CookieService } from 'ngx-cookie-service';
         deps: [HttpClient]
       }
     }),
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ export class RegistrationService {
                 public router: Router,
                 public ngZone: NgZone){}
 
-SendVerificationMail(mail: string, pass:string) {
+sendVerificationMail(mail: string, pass:string) :void{
   this.afAuth.createUserWithEmailAndPassword(mail, pass)
     .then((result) => {
       result.user.sendEmailVerification();
@@ -18,17 +18,17 @@ SendVerificationMail(mail: string, pass:string) {
     window.alert(error.message)
   });
   }
-  public setItem(key: string, value: string) {
+  public setItem(key: string, value: string) :void{
     localStorage.setItem(key, value);
   }
 
-  public getItem(key: string){
+  public getItem(key: string): string{
     return localStorage.getItem(key)
   }
-  public removeItem(key:string) {
+  public removeItem(key:string): void{
     localStorage.removeItem(key);
   }
-  public clear(){
+  public clear(): void{
     localStorage.clear();
   }
 }

@@ -1,4 +1,4 @@
-export class UserFirebase {
+export interface UserFirebase {
   id: string;
   isAuthenticated: boolean;
   isMailConfirmed: boolean;

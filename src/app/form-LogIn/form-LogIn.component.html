@@ -1,26 +1,25 @@
 <img src="../assets/ikone/users.gif" class="users">
-<form [formGroup]="LogInForm" (ngSubmit)="onSubmit()">
-
+<form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
   <label>
-    <div class="wrong" *ngIf="this.wrongCredentials">
+    <p class="wrong" *ngIf="this.wrongCredentials">
       {{'usernameError' | translate }}
-    </div>
+    </p>
     <div *ngIf="username.invalid" class="wrong">
-      <div *ngIf="username.errors.minlength">
+      <p *ngIf="username.errors.minlength">
         {{'usernameWarning' | translate }}
-      </div>
+      </p>
     </div>
-    <input type="text" formControlName="username" class="inputUser" value="username" required (focus)="onFocusEventUser($event)" required >
+    <input type="text" formControlName="username" class="input-user" value="username" required (focus)="onFocusEventUser($event)" required >
 
   </label>
-  <p></p>
+  <br/>
   <label>
     <div *ngIf="password.invalid" class="wrong">
-      <div *ngIf="password.errors.minlength">
+      <p *ngIf="password.errors.minlength">
         {{'passWarning' | translate }}
-      </div>
+      </p>
     </div>
-    <input type="{{typeInput}}" formControlName="password" class="inputPass" value="password" (focus)="onFocusEventPass($event)" required >
+    <input type="{{typeInput}}" formControlName="password" class="input-pass" value="password" (focus)="onFocusEventPass($event)" required >
   </label>
   <span>
       <select #selectedLang (change)="switchLang(selectedLang.value)">
@@ -30,8 +29,9 @@
         </option>
       </select>
     </span>
-  <p></p>
-  <button type="submit" [disabled]="!LogInForm.valid" class="LogInButton">{{'button' | translate }}</button>
-  <p></p>
-  <button routerLink="/Registration" class="RegButton">Registration</button>
+  <br/>
+  <button type="submit" [disabled]="!logInForm.valid" class="login-button">{{'button' | translate }}</button>
+  <br/><br/>
+  <button routerLink="/Registration" class="reg-button">Registration</button>
 </form>
+

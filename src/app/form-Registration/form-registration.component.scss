@@ -37,10 +37,10 @@ input:focus{
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.inputPass{
+.input-pass{
   background-image: url(/assets/ikone/lock.gif);
 }
-.inputUser{
+.input-user{
   background-image: url(/assets/ikone/user.gif);
 }
 
@@ -68,7 +68,7 @@ input:focus{
   }
 }
 
-.LogInButton{
+.reg-button{
   color: #fafafa;
   font-family: 'Raleway';
   background-color: #00a3e0;
@@ -81,7 +81,7 @@ input:focus{
   @media screen and (max-width:$desktop) and (min-width:$laptop)
   {
     height:50px;
-    width:30%;
+    width:35%;
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 1px;
@@ -90,7 +90,7 @@ input:focus{
   @media screen and (max-width:$laptop) and (min-width:$tablet)
   {
     height:50px;
-    width:35%;
+    width:40%;
     font-size: 18px;
     font-weight: bold;
     letter-spacing: 1px;
@@ -99,23 +99,23 @@ input:focus{
   @media screen and (max-width:$tablet) and (min-width:$mobile)
   {
     height:42px;
-    width:52%;
+    width:60%;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
     margin-left: 50px;
   }
 }
-.LogInButton:hover{
+.reg-button:hover{
   background-color: #24afe3;
 }
-.LogInButton:active{
+.reg-button:active{
   background-color: #24afe3;
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 10px #719ECE;
 }
-.LogInButton:focus{
+.reg-button:focus{
   outline: none !important;
 }
 

@@ -6,19 +6,19 @@ import { ArduinoFirebase } from '../security/Arduino-firebase';
   providedIn: 'root'
 })
 export class ArduinoDataService {
-  TemperatureHistory: any[]=[];
-  HumidityHistory: any[]=[];
-  TemperatureCurr: any[]=[];
-  HumidityCurr: any[]=[];
+  temperatureHistory: any[]=[];
+  humidityHistory: any[]=[];
+  temperatureCurr: any[]=[];
+  humidityCurr: any[]=[];
   constructor(private angularFirestore: AngularFirestore) { }
 
   //current temperature
-  fillCurrTempData() {
-    this.TemperatureCurr.length=0;
+  fillCurrTempData(): Promise<any> {
+    this.temperatureCurr.length=0;
     return this.getDataFromFirebase("TempCurr")
       .then((ss) => {
           ss.docs.forEach((doc) => {
-            this.TemperatureCurr.push(doc.data());
+            this.temperatureCurr.push(doc.data());
           });
         }
       )
@@ -27,18 +27,18 @@ export class ArduinoDataService {
       });
 
   }
-  getCurrTemp(){
+  getCurrTemp(): any{
 
-    return this.TemperatureCurr;
+    return this.temperatureCurr;
   }
 
   //current humidity
-  fillCurrHumData() {
-    this.HumidityCurr.length=0;
+  fillCurrHumData():  Promise<any>{
+    this.humidityCurr.length=0;
     return this.getDataFromFirebase("HumCurr")
       .then((ss) => {
           ss.docs.forEach((doc) => {
-            this.HumidityCurr.push(doc.data());
+            this.humidityCurr.push(doc.data());
           });
         }
       )
@@ -47,17 +47,17 @@ export class ArduinoDataService {
       });
 
   }
-  getCurrHum(){
-    return this.HumidityCurr;
+  getCurrHum(): any{
+    return this.humidityCurr;
   }
 
   //get temperature history data
-  fillHistTempData() {
-    this.TemperatureHistory.length=0;
+  fillHistTempData(): Promise<any>{
+    this.temperatureHistory.length=0;
     return this.getDataFromFirebase("TempHistory")
       .then((ss) => {
           ss.docs.forEach((doc) => {
-            this.TemperatureHistory.push(doc.data());
+            this.temperatureHistory.push(doc.data());
           });
         }
       )
@@ -66,25 +66,25 @@ export class ArduinoDataService {
       });
 
   }
-  getHistTemp(){
-    this.TemperatureHistory= this.TemperatureHistory.sort((t1, t2) => {
+  getHistTemp(): any{
+    this.temperatureHistory= this.temperatureHistory.sort((t1, t2) => {
       const time1 = Number(t1.timestamp);
       const time2 = Number(t2.timestamp);
       if (time1 > time2) { return 1; }
       if (time1 < time2) { return -1; }
       return 0;
     });
-    return this.TemperatureHistory;
+    return this.temperatureHistory;
   }
 
   //get humidity history data
 
-  fillHistHumData() {
-    this.TemperatureHistory.length=0;
+  fillHistHumData(): Promise<any>{
+    this.humidityHistory.length=0;
     return this.getDataFromFirebase("HumHistory")
       .then((ss) => {
           ss.docs.forEach((doc) => {
-            this.HumidityHistory.push(doc.data());
+            this.humidityHistory.push(doc.data());
           });
         }
       )
@@ -93,19 +93,19 @@ export class ArduinoDataService {
       });
 
   }
-  getHistHum(){
-    this.HumidityHistory= this.HumidityHistory.sort((t1, t2) => {
+  getHistHum(): any{
+    this.humidityHistory= this.humidityHistory.sort((t1, t2) => {
       const time1 = Number(t1.timestamp);
       const time2 = Number(t2.timestamp);
       if (time1 > time2) { return 1; }
       if (time1 < time2) { return -1; }
       return 0;
     });
-    return this.HumidityHistory;
+    return this.humidityHistory;
   }
 
   //retrieves data from database
-  getDataFromFirebase(coll: string){
+  getDataFromFirebase(coll: string):  Promise<any>{
     return this.angularFirestore
       .collection(coll)
       .get().toPromise();
